@@ -1,6 +1,6 @@
 package com.example.desafio_cnab.domain.models;
 
-import com.example.desafio_cnab.utils.enums.TipoTransacao;
+import com.example.desafio_cnab.utils.enums.TipoTransacaoEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,7 +26,8 @@ public class Transacao implements Serializable {
   private UUID id;
 
   @Column(name = "tipo_transacao", nullable = false)
-  private TipoTransacao tipoTransacao;
+  @Enumerated(EnumType.ORDINAL)
+  private TipoTransacaoEnum tipoTransacaoEnum;
 
   @Column(name = "data_transacao", nullable = false)
   private LocalDate dataTransacao;
@@ -50,7 +51,7 @@ public class Transacao implements Serializable {
   private String nomeLoja;
 
   public Transacao(
-    TipoTransacao tipoTransacao,
+    TipoTransacaoEnum tipoTransacaoEnum,
     LocalDate dataTransacao,
     BigDecimal valor,
     String cpfBeneficiario,
@@ -58,7 +59,7 @@ public class Transacao implements Serializable {
     Time horario,
     String donoLoja,
     String nomeLoja) {
-    this.tipoTransacao = tipoTransacao;
+    this.tipoTransacaoEnum = tipoTransacaoEnum;
     this.dataTransacao = dataTransacao;
     this.valor = valor;
     this.cpfBeneficiario = cpfBeneficiario;
